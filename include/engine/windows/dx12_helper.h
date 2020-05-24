@@ -7,9 +7,9 @@ class DX12Helper
 {
     struct Impl;
     std::unique_ptr<Impl> impl_;
-    void Finalize();
+    void                  Finalize();
 
-  public:
+public:
     DX12Helper();
     ~DX12Helper();
 

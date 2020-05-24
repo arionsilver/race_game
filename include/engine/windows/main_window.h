@@ -10,7 +10,7 @@ class MainWindow
     struct Impl;
     std::unique_ptr<Impl> impl_;
 
-  public:
+public:
     MainWindow();
     ~MainWindow();
 

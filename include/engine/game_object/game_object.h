@@ -7,7 +7,7 @@ namespace Engine
 
 class GameObject
 {
-  public:
+public:
     GameObject();
     virtual ~GameObject();
 };

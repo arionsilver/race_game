@@ -8,8 +8,8 @@ namespace Windows
 struct MainWindow::Impl
 {
     static constexpr const char *ClassName = "MainWindow";
-    HWND handle_;
 
+    HWND      handle_;
     WNDCLASSA wnd_class_;
 
     ~Impl()
@@ -44,20 +44,30 @@ struct MainWindow::Impl
     {
         assert(width > 0 && height > 0);
 
-        wnd_class_.style = CS_VREDRAW | CS_HREDRAW;
-        wnd_class_.lpfnWndProc = default_event_handler;
-        wnd_class_.cbClsExtra = 0;
-        wnd_class_.cbWndExtra = 0;
-        wnd_class_.hInstance = nullptr;
-        wnd_class_.hIcon = LoadIcon(nullptr, IDI_APPLICATION);
-        wnd_class_.hCursor = LoadCursor(nullptr, IDC_ARROW);
+        wnd_class_.style         = CS_VREDRAW | CS_HREDRAW;
+        wnd_class_.lpfnWndProc   = default_event_handler;
+        wnd_class_.cbClsExtra    = 0;
+        wnd_class_.cbWndExtra    = 0;
+        wnd_class_.hInstance     = nullptr;
+        wnd_class_.hIcon         = LoadIcon(nullptr, IDI_APPLICATION);
+        wnd_class_.hCursor       = LoadCursor(nullptr, IDC_ARROW);
         wnd_class_.hbrBackground = CreateSolidBrush(GetSysColor(COLOR_WINDOW));
-        wnd_class_.lpszMenuName = nullptr;
+        wnd_class_.lpszMenuName  = nullptr;
         wnd_class_.lpszClassName = ClassName;
         RegisterClassA(&wnd_class_);
 
-        handle_ = CreateWindowExA(WS_EX_APPWINDOW, ClassName, title_name.c_str(), WS_OVERLAPPEDWINDOW, CW_USEDEFAULT,
-                                  CW_USEDEFAULT, width, height, nullptr, nullptr, nullptr, this);
+        handle_ = CreateWindowExA(WS_EX_APPWINDOW,
+                                  ClassName,
+                                  title_name.c_str(),
+                                  WS_OVERLAPPEDWINDOW,
+                                  CW_USEDEFAULT,
+                                  CW_USEDEFAULT,
+                                  width,
+                                  height,
+                                  nullptr,
+                                  nullptr,
+                                  nullptr,
+                                  this);
     }
 
     void Show()
@@ -68,9 +78,7 @@ struct MainWindow::Impl
         }
     }
 
-    void SetFullscreen(bool is_fullscreen)
-    {
-    }
+    void SetFullscreen(bool is_fullscreen) {}
 
     void RunMainLoop()
     {
@@ -90,34 +98,32 @@ struct MainWindow::Impl
     {
         switch (uMsg)
         {
-        case WM_DESTROY:
-            PostQuitMessage(0);
-            return 0;
-        case WM_PAINT:
-            return 0;
+        case WM_DESTROY: PostQuitMessage(0); return 0;
+        case WM_PAINT: return 0;
         }
         return DefWindowProc(handle_, uMsg, wParam, lParam);
     }
 };
 
-MainWindow::MainWindow() : impl_(std::make_unique<Impl>())
-{
-}
+MainWindow::MainWindow() : impl_(std::make_unique<Impl>()) {}
 
 MainWindow::~MainWindow() = default;
 
-void MainWindow::Initialize(const std::string &title_name, uint32_t width, uint32_t height)
+void
+MainWindow::Initialize(const std::string &title_name, uint32_t width, uint32_t height)
 {
     impl_->Initialize(title_name, width, height);
     impl_->Show();
 }
 
-void MainWindow::SetFullscreen(bool is_fullscreen)
+void
+MainWindow::SetFullscreen(bool is_fullscreen)
 {
     impl_->SetFullscreen(is_fullscreen);
 }
 
-void MainWindow::Run()
+void
+MainWindow::Run()
 {
     impl_->RunMainLoop();
 }
