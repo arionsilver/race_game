@@ -9,7 +9,7 @@ class DX12Helper
     std::unique_ptr<Impl> impl_;
     void Finalize();
 
-public:
+  public:
     DX12Helper();
     ~DX12Helper();
 

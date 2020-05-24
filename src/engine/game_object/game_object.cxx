@@ -3,7 +3,10 @@
 namespace Engine
 {
 
-GameObject::GameObject() {}
+GameObject::GameObject()
+{
+}
+
 GameObject::~GameObject() = default;
 
 } // namespace Engine
