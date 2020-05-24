@@ -1,1 +1,1 @@
-add_library(GameObject game_object.cxx)
+add_library(EngineGameObject game_object.cxx)
