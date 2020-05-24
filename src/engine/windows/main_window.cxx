@@ -41,7 +41,7 @@ namespace Windows
             }
         }
 
-        void Initialize(std::string title_name, uint32_t width, uint32_t height)
+        void Initialize(const std::string &title_name, uint32_t width, uint32_t height)
         {
             assert(width > 0 && height > 0);
 
@@ -105,7 +105,7 @@ namespace Windows
 
     MainWindow::~MainWindow() = default;
 
-    void MainWindow::Initialize(std::string title_name, uint32_t width, uint32_t height)
+    void MainWindow::Initialize(const std::string &title_name, uint32_t width, uint32_t height)
     {
         impl_->Initialize(title_name, width, height);
         impl_->Show();
